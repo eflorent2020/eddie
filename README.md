@@ -1,4 +1,8 @@
-# Features
+
+A SaaS that takes a template, and some JSON data and produce a PDF,
+Supercharger by GoLang, VueJS interface included
+
+## Features
 
 * Super-fast Golang SaaS
 * User and ACL management
@@ -10,13 +14,14 @@
 * End to end data encryption (SSL)
 * ISO 27001 datacenter
 
-# Todo
+## Todo
 
 ### small improvments
 - api key change reset cookie store
 - better relogin , jwt exp.
 
 ### roadmap
+- OAuth2
 - log entries
 - qrcode
 - add custom page size
@@ -26,12 +31,9 @@
 - P12 cert. expiration
 - sample docs
 - DASHBOARD
-' Integrated cache for fast document delivery
+- Integrated cache for fast document delivery
 - edit roles
 - invite user / create account
 - document / mail / versioning
-
-// https://engineering.vena.io/2018/01/12/using-golang-with-a-private-github-and-forks/
-
 
 
