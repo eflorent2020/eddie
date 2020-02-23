@@ -1,0 +1,33 @@
+version: '2'
+services: 
+  nginx-proxy:
+    container_name: https-portal
+    image: steveltn/https-portal
+    ports:
+      - "443:443"  
+      - "80:80"       
+    volumes:
+      - /data/ssl_certs:/var/lib/https-portal
+      - /var/log/nginx:/var/log/nginx
+      - /etc/nginx/nginx.conf.erb:/var/lib/nginx-conf/nginx.conf.erb:ro
+      - /etc/nginx/default.ssl.conf.erb:/var/lib/nginx-conf/default.ssl.conf.erb:ro
+    environment:
+      - STAGE=production
+      - DOMAINS= eddie.onthewifi.com -> http://eddie:8000/
+    depends_on:
+     - eddie
+     
+  eddie:
+    container_name: eddie
+    build: .
+    image: eflorent/eddie
+    env_file:
+      - .env
+    environment:
+      - VIRTUAL_HOST=eddie.onthewifi.com
+      - VIRTUAL_PORT=8000
+    ports:
+      - "8000:8000"
+
+
+   
