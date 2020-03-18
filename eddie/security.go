@@ -35,8 +35,9 @@ func setupAuth() *jwt.GinJWTMiddleware {
 	}
 }
 
-func authorizator(userId string, c *gin.Context) bool {
-
+func authorizator(data interface{}, c *gin.Context) bool {
+	// v, ok := data.(*User);
+	// uid := v.ID
 	claims := jwt.ExtractClaims(c)
 	uid := int(claims["uid"].(float64))       // user
 	cid := int(claims["companyID"].(float64)) // company
@@ -164,33 +165,43 @@ func canEditUser(uid int, resource int) bool {
 	return false
 }
 
-func payload(email string) map[string]interface{} {
+func payload(data interface{}) jwt.MapClaims {
 	var user User
-	db.Where("Email = ?", email).First(&user)
-	if user.ID == 0 {
-		return map[string]interface{}{
-			"id":        0,
-			"roles":     0,
-			"companyID": 0}
+	if v, ok := data.(*User); ok {
+		return jwt.MapClaims{
+			"id": v.ID,
+			"uid": v.ID,
+			"companyID": v.CompanyID,
+			"roles": user.Roles,
+		}
 	} else {
-		return map[string]interface{}{
-			"id":        user.ID,
-			"uid":       user.ID,
-			"roles":     user.Roles,
-			"companyID": user.CompanyID}
+		return jwt.MapClaims{
+			"id": 0,
+			"uid": 0,
+			"companyID": 0,
+			"roles": 0,
+		}
 	}
 }
 
-func authenticator(email string, password string, c *gin.Context) (string, bool) {
+func authenticator(c *gin.Context) (interface{}, error) {
+	// email string, password string,
+	var loginVals login
+	if err := c.ShouldBind(&loginVals); err != nil {
+		return "", jwt.ErrMissingLoginValues
+	}
+	email := loginVals.Username
+	password := loginVals.Password
+
 	var user User
 	db.Where("Email = ?", email).First(&user)
 	if user.ID == 0 {
-		return "user not found", false
+		return nil, jwt.ErrFailedAuthentication
 	} else {
 		if CheckPasswordHash(password, user.Password) {
-			return email, true
+			return user, nil
 		}
-		return "invalid password", false
+		return nil, jwt.ErrFailedAuthentication
 	}
 }
 
@@ -291,6 +302,11 @@ type LogEntry struct {
 	DocumentUUID string
 	Data         []byte
 	DataMD5      string
+}
+
+type login struct {
+	Username string `form:"username" json:"username" binding:"required"`
+	Password string `form:"password" json:"password" binding:"required"`
 }
 
 func getLogEntriesHandler(c *gin.Context) {
