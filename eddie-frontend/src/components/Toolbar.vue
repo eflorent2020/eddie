@@ -104,8 +104,6 @@ export default {
           Persistent.commit('addAuthToken', res.body.token)
           let data = JwtDecode(res.body.token)
           this.setUpHttpHeader(res.body.token)
-          console.log(data)
-          console.log('preloading company ' + data.companyID)
           this.preloadCompany(data.companyID, data.uid)
           this.openLogin = false
         } else {
@@ -126,24 +124,18 @@ export default {
     preloadUser: function (id) {
       let url = Persistent.getters.baseUrl + API_VERSION + 'user/' + id
       this.$http.get(url).then(function (res) {
-        // @todo check this response
-        console.log('preloading user ' + id)
         Persistent.commit('setUser', res.body.data)
         EventBus.$emit(Events.loadingEnd)
       }, response => {
-        console.log(response)
         this.notifyError(response.status, response.body.message)
       })
     },
     preloadCompany: function (cid, uid) {
       let url = Persistent.getters.baseUrl + API_VERSION + 'company/' + cid
       this.$http.get(url).then(function (res) {
-        // @todo check this response
-        console.log('got', res.body.data)
         Persistent.commit('setUserCompany', res.body.data)
         this.preloadUser(uid)
       }, response => {
-        console.log(response)
         this.notifyError(response.status, response.body.message)
       })
     },
