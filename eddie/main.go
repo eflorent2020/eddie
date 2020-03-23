@@ -44,6 +44,7 @@ func main() {
 	r.StaticFile("/", "./eddie-frontend/dist/index.html")
 
 	r.POST("/login", authMiddleware.LoginHandler)
+	r.OPTIONS("/login", optionsHandler)
 	r.GET("/refresh_token", authMiddleware.RefreshHandler)
 
 	r.POST("/document/:id", serveDocument)

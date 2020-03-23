@@ -14,6 +14,13 @@ Supercharger by GoLang, VueJS interface included
 * End to end data encryption (SSL)
 * ISO 27001 datacenter
 
+## Usage:
+
+`
+go build && ENV=development ./eddie
+`
+
+
 ## Todo
 
 ### small improvments

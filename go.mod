@@ -13,5 +13,6 @@ require (
 	github.com/unidoc/unidoc v2.2.0+incompatible
 	golang.org/x/crypto v0.0.0-20200317142112-1b76d66859c6
 	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect
+	golang.org/x/tools/gopls v0.3.4 // indirect
 	gopkg.in/dgrijalva/jwt-go.v3 v3.2.0 // indirect
 )
