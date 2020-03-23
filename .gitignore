@@ -1,3 +1,4 @@
 .env
 samples/*.db
 eddie/eddie
+.vscode

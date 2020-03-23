@@ -106,6 +106,7 @@ export default {
           Persistent.commit('addAuthToken', res.body.token)
           let data = JwtDecode(res.body.token)
           this.setUpHttpHeader(res.body.token)
+          console.log(data)
           console.log('preloading company ' + data.companyID)
           this.preloadCompany(data.companyID, data.uid)
           this.openLogin = false

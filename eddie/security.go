@@ -166,22 +166,16 @@ func canEditUser(uid int, resource int) bool {
 }
 
 func payload(data interface{}) jwt.MapClaims {
-	var user User
-	if v, ok := data.(*User); ok {
+	//var user User
+	if v, ok := data.(User); ok {
 		return jwt.MapClaims{
-			"id": v.ID,
-			"uid": v.ID,
+			"id":        v.ID,
+			"uid":       v.ID,
 			"companyID": v.CompanyID,
-			"roles": user.Roles,
-		}
-	} else {
-		return jwt.MapClaims{
-			"id": 0,
-			"uid": 0,
-			"companyID": 0,
-			"roles": 0,
+			"roles":     v.Roles,
 		}
 	}
+	return jwt.MapClaims{}
 }
 
 func authenticator(c *gin.Context) (interface{}, error) {
@@ -195,6 +189,7 @@ func authenticator(c *gin.Context) (interface{}, error) {
 
 	var user User
 	db.Where("Email = ?", email).First(&user)
+
 	if user.ID == 0 {
 		return nil, jwt.ErrFailedAuthentication
 	} else {
