@@ -94,8 +94,6 @@ export default {
         return
       }
       EventBus.$emit(Events.loadingStart)
-      console.log(Persistent.getters.baseUrl)
-      // let url = '/login'
       let url = Persistent.getters.baseUrl + '/login'
       var data = {
         username: this.login,
