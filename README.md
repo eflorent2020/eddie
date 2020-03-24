@@ -12,35 +12,22 @@ Supercharger by GoLang, VueJS interface included
 * Documents signatures
 * RSA Database encryption
 * End to end data encryption (SSL)
-* ISO 27001 datacenter
+* taylored for ISO 27001 datacenter
 
 ## Usage:
-
-`
-go build && ENV=development ./eddie
-`
-
-
-## Todo
-
-### small improvments
-- api key change reset cookie store
-- better relogin , jwt exp.
+```
+cd eddie
+go build && go test -v
+ENV=development ./eddie
+```
 
 ### roadmap
-- OAuth2
-- log entries
-- qrcode
-- add custom page size
-- bind header/footer template data (current page of ...)
-- mailchimp integration
-- PDF P12 signing or workflow
-- P12 cert. expiration
-- sample docs
-- DASHBOARD
-- Integrated cache for fast document delivery
-- edit roles
-- invite user / create account
-- document / mail / versioning
+
+This software has been written back in 2018.
+
+I am actually working on one other project but would be please to pack it up for you.
+
+Feel free to contact me if you need fast, efficient, customizable JSON to PDF gateway.
+
 
 

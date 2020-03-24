@@ -10,6 +10,7 @@ require (
 	github.com/jinzhu/gorm v1.9.12
 	github.com/jordan-wright/email v0.0.0-20200307200233-de844847de93
 	github.com/satori/go.uuid v1.2.0
+	github.com/stretchr/testify v1.4.0
 	github.com/unidoc/unidoc v2.2.0+incompatible
 	golang.org/x/crypto v0.0.0-20200317142112-1b76d66859c6
 	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect

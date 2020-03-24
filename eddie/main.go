@@ -13,12 +13,25 @@ import (
 var port string
 
 func main() {
+
+	db, err = bootstrap()
+	defer db.Close()
+
+	router := SetupRouter()
+	http.ListenAndServe(":"+port, router)
+}
+
+func SetupRouter() *gin.Engine {
+
 	port = os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
 	}
-	// TODO check if port is busy
 	env := os.Getenv("ENV")
+
+	// the jwt middleware
+	authMiddleware := setupAuth()
+
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
@@ -32,12 +45,6 @@ func main() {
 			MaxAge:           12 * time.Hour}
 		r.Use(cors.New(config))
 	}
-
-	db, err = bootstrap()
-	defer db.Close()
-
-	// the jwt middleware
-	authMiddleware := setupAuth()
 
 	//router.Static("/assets", "./eddie-frontend/dist/static")
 	r.StaticFS("/static", http.Dir("./eddie-frontend/dist/static"))
@@ -92,5 +99,6 @@ func main() {
 		api.GET("/logentries/", getLogEntriesHandler)
 	}
 
-	http.ListenAndServe(":"+port, r)
+	return r
+
 }
