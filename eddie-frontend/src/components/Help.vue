@@ -6,7 +6,7 @@
     <v-card-text>
       <h2>API</h2>
       <h3>API Document</h3>
-      <p>
+
         <code>POST /document/:document_id</code>
         <h3>Params</h3>
         <ul>
@@ -22,7 +22,7 @@
           <li>optional <var>sign_contact</var> id</li>
           
         </ul>
-      </p> 
+
       <h3>API Mail</h3>
       <p>
         <code>POST /mail/:mail_id</code>
@@ -44,7 +44,7 @@
           <li>optional <var>sign_contact</var> id</li>
           
         </ul>
-      </p>            
+       
       <h2>Using the template engine</h2>
       <ul>
         <li><h3>Simple replace</h3>          
@@ -90,8 +90,7 @@
       <h3> </h3>
 
 
-        </li>
-      </ul>
+
     </v-card-text>
   </v-card>
 </template>

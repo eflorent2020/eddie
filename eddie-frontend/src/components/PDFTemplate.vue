@@ -33,7 +33,7 @@
                 Sample data
               </v-btn>              
 </v-btn-toggle>
-</p>
+
 
 </v-card-text>
 
@@ -275,7 +275,7 @@
             <v-card-text style="min-height: 480px;">
               <code>curl -X POST 'http://{{host}}/document/{{template.UUID}}' \
                 -d '{"api_key":"{{user.ApiKey}}", "email":"{{user.Email}}", "data": {{ sampleData }} }' -o output.pdf</code>
-</p>
+
               <json-editor ref="editor" :json="template.SampleData" />
             </v-card-text>
         </v-card>
@@ -370,7 +370,7 @@ export default {
     deleteTemplate () {
       EventBus.$emit(Events.loadingStart)
       let url = Persistent.getters.baseUrl + API_VERSION + 'pdftemplate/' + this.id
-      this.$http.delete(url).then(function (res) {
+      this.$http.delete(url).then(function () {
         this.$router.push({name: 'PDFTemplates'})
         EventBus.$emit(Events.loadingEnd)
       }, response => {
@@ -433,7 +433,7 @@ export default {
       copyData.SignaturePageDefinition = JSON.stringify(this.template.SignaturePageDefinition)
       copyData = this.encodeBase64(copyData)
       let url = Persistent.getters.baseUrl + API_VERSION + 'pdftemplate/' + this.id
-      this.$http.post(url, copyData).then(function (res) {
+      this.$http.post(url, copyData).then(function () {
         EventBus.$emit(Events.loadingEnd)
         this.loadTemplate()
         // @todo check this response
@@ -502,7 +502,7 @@ export default {
             // window.URL.revokeObjectURL(link.href)
           } else {
             // resend the data to get the error (not a blob)
-            me.$http.post(url, data).then(function (res) {
+            me.$http.post(url, data).then(function () {
               EventBus.$emit(Events.loadingEnd)
               // window.URL.revokeObjectURL(url);
             }, response => {

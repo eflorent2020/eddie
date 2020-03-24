@@ -15,7 +15,6 @@
           <v-card-actions> 
             <v-btn color="warning" @click.stop="dialog = true">Delete</v-btn> 
             <v-btn color="primary" @click="submit" :disabled="!valid">Save</v-btn>             
-<!--            <v-btn color="secondary">Log file</v-btn>   -->
 
              <v-btn  @click="close">Close</v-btn>
 
@@ -57,8 +56,8 @@
 curl -X POST https://{{host}}/mail/{{template.UUID}} \
      -d '{ "api_key":"{{user.ApiKey}}", 
            "email":"{{user.Email}}", \ 
-           "from" : "{{user.Name}} <{{user.Email}}>", \           
-           "to" : "{{user.Name}} <{{user.Email}}>", \
+           "from" : "{{user.Name}} &lt;{{user.Email}}&gt;", \           
+           "to" : "{{user.Name}} &lt;{{user.Email}}&gt;", \
            "data": {{ sampleData }}', \
            "attachements": null
            </code>
@@ -124,7 +123,8 @@ export default {
     deleteTemplate () {
       EventBus.$emit(Events.loadingStart)
       let url = Persistent.getters.baseUrl + API_VERSION + 'mailtemplate/' + this.id
-      this.$http.delete(url).then(function (res) {
+      this.$http.delete(url).then(function () {
+        // TODO check response
         this.$router.push({name: 'MailTemplates'})
         EventBus.$emit(Events.loadingEnd)
       }, response => {
@@ -165,7 +165,8 @@ export default {
       copyData = this.encodeBase64(copyData)
       let url = Persistent.getters.baseUrl + API_VERSION + 'mailtemplate/' + this.id
       console.log(copyData)
-      this.$http.post(url, copyData).then(function (res) {
+      this.$http.post(url, copyData).then(function () {
+        // TODO check response
         EventBus.$emit(Events.loadingEnd)
         this.loadTemplate()
       }, response => {

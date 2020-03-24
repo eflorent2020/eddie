@@ -13,7 +13,7 @@
                       ripple
                       :key="item.ID">
                       <v-list-tile-content>
-                          <h4>{{ item.Name }}</h4>                 
+                          <h4>{{ index }}{{ item.Name }}</h4>                 
                       </v-list-tile-content>
                       <v-list-tile-action>
                         <v-list-tile-action-text>
@@ -68,6 +68,7 @@ export default {
       }
       this.$http.put(url, data).then(function (res) {
         // @todo check this response
+        console.log(res)
         this.loadTemplates()
       }, response => {
         console.log(response)

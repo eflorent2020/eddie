@@ -136,7 +136,7 @@ export default {
     deleteSignature () {
       EventBus.$emit(Events.loadingStart)
       let url = Persistent.getters.baseUrl + API_VERSION + 'p12signature/' + this.id
-      this.$http.delete(url).then(function (res) {
+      this.$http.delete(url).then(function () {
         this.$router.push({name: 'P12Signatures'})
         EventBus.$emit(Events.loadingEnd)
       }, response => {

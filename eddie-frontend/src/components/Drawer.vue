@@ -1,41 +1,42 @@
 <template>
 
 <v-navigation-drawer
-dark
-      temporary
-      v-model="drawer"
-      absolute
-    >
-      <v-list class="pa-1">
-        <v-list-tile avatar tag="div">
-          <v-list-tile-avatar>
-            <v-icon>perm_identity</v-icon>
-            <!--
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" />
-          -->
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ username }}</v-list-tile-title>
-            <v-list-tile-title class="caption">{{ companyname }}</v-list-tile-title>
-          </v-list-tile-content>
-          <v-list-tile-action>
-            <v-btn icon @click.stop="toggle">
+  dark
+  temporary
+  v-model="drawer"
+  absolute
+  >
+           <v-list
+          dense
+          nav
+          class="py-0"
+        >
+
+        <v-list-item @click.stop="toggle">
+            <v-list-item-icon>
               <v-icon>chevron_left</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-      </v-list>
-      <v-list class="pt-0" dense>
-        <v-divider light></v-divider>
-        <v-list-tile v-for="item in items" :key="item.title" @click="navigate(item.route)">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-      </v-list>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title></v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            @click="navigate(item.route)"
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+
     </v-navigation-drawer>
 </template>
 <script>

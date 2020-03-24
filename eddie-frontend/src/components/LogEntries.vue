@@ -33,7 +33,7 @@ export default {
     this.loadEntries()
   },
   methods: {
-    close: function (id) {
+    close: function () {
       this.$router.push({name: 'HelloWord'})
     },
     prepareTable: function () {

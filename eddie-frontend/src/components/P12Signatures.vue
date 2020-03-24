@@ -6,7 +6,7 @@
           <v-layout row wrap>
             <v-flex sm12>
                 <v-list>
-                  <template v-for="(item, index) in signatures">
+                  <template v-for="(item) in signatures">
                     <v-list-tile
                       @click.stop="open(item.ID)"
                       avatar
@@ -68,7 +68,7 @@ export default {
         name: this.company.Name + ' - ' + this.user.Name + ' ' + count,
         DefaultContact: contact
       }
-      this.$http.put(url, data).then(function (res) {
+      this.$http.put(url, data).then(function () {
         // @todo check this response
         // this.signatures = res.body.data
         this.loadSignatures()

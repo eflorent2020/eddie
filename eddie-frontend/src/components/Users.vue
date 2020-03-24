@@ -13,7 +13,7 @@
                       ripple
                       :key="item.Email">
                       <v-list-tile-content>
-                          <h4>{{ item.Name }}</h4>                 
+                          <h4>{{index}} {{ item.Name }}</h4>                 
                       </v-list-tile-content>
                       <v-list-tile-action>
                         <v-list-tile-action-text>

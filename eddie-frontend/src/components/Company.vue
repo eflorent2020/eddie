@@ -139,7 +139,7 @@ export default {
     },
     saveCompany: function () {
       let url = Persistent.getters.baseUrl + API_VERSION + 'company/' + Persistent.getters.company.ID
-      this.$http.post(url, this.company).then(function (res) {
+      this.$http.post(url, this.company).then(function () {
         // @todo check this response
         // this.company = res.body.data
       }, response => {

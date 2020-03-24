@@ -6,7 +6,7 @@
           <v-layout row wrap>
             <v-flex sm12>
                 <v-list>
-                  <template v-for="(item, index) in templates">
+                  <template v-for="(item) in templates">
                     <v-list-tile
                       @click.stop="open(item.ID)"
                       avatar
@@ -66,7 +66,7 @@ export default {
       let data = {
         Subject: 'template ' + count
       }
-      this.$http.put(url, data).then(function (res) {
+      this.$http.put(url, data).then(function () {
         // @todo check this response
         this.loadTemplates()
       }, response => {

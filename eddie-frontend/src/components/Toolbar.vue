@@ -1,13 +1,13 @@
 <template>
-  <v-toolbar dark color="indigo darken-3">
-    <v-toolbar-side-icon  @click="toggleDrawer()"></v-toolbar-side-icon>
+  <v-app-bar       :clipped-left="$vuetify.breakpoint.lgAndUp"
+      app dense dark color="indigo darken-3">
+     <v-app-bar-nav-icon @click="toggleDrawer()"></v-app-bar-nav-icon>
     <v-toolbar-title class="white--text">{{companyname}}</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-btn icon>
-    <!--  <v-icon>refresh</v-icon> -->
     </v-btn>
         <v-btn color="primary"  v-if="!isLoggedIn" slot="activator">Login</v-btn>
-		  <v-btn v-if="isLoggedIn" icon @click="logout">
+          <v-btn v-if="isLoggedIn" icon @click="logout">
          <v-icon>exit_to_app</v-icon>
         </v-btn>   
     <v-dialog v-model="openLogin" persistent max-width="500px">
@@ -35,7 +35,7 @@
           </v-card-actions>
         </v-card>
   </v-dialog>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
